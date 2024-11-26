@@ -36,7 +36,7 @@ public class DropItem : MonoBehaviour
         }
     }
 
-    void ApplyEffect(Player player)
+    public void ApplyEffect(Player player)
     {
         switch (effectType)
         {

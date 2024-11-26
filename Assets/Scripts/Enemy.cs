@@ -4,14 +4,23 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int maxHp;
-    public GameObject bulletPrefab;
-    [SerializeField] private Transform firePoint;
+    public int enemyDamage;
+    public float fireSpeed;
     [SerializeField] private float fireDelay;
+    [SerializeField] private Transform firePoint;
     [SerializeField] private bool canShoot;
+    public GameObject bulletPrefab;
+    public int enemyScore;
+    private GameManager gameManager;
     [SerializeField] private GameObject[] dropItems;
 
     void Start()
     {
+        gameManager = GameManager.Instance;
+        if (gameManager == null)
+        {
+            Debug.LogError("GameManager instance not found!");
+        }
         canShoot = true; // Enemy bisa menembak di awal
     }
 
@@ -33,6 +42,8 @@ public class Enemy : MonoBehaviour
             if (maxHp <= 0)
             {
                 Drop();
+                gameManager.enemyDestroy++;
+                gameManager.score += enemyScore;
                 Destroy(gameObject);
             }
         }
@@ -48,7 +59,15 @@ public class Enemy : MonoBehaviour
 
     void Shoot()
     {
-        GameObject peluru = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+
+        // Memberikan kecepatan ke peluru
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.linearVelocity = new Vector2(0, fireSpeed);
+
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bulletScript.damage += enemyDamage;
+        bulletScript.speed += fireSpeed;
     }
 
     void Drop()

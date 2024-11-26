@@ -11,6 +11,22 @@ public class Peluru : MonoBehaviour
             collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
         }
 
+        else if (collision.gameObject.tag == "Drop")
+        {
+            DropItem drop = collision.GetComponent<DropItem>();
+
+            if (drop != null)
+            {
+                // Referensi ke player
+                Player player = FindAnyObjectByType<Player>();
+                if (player != null)
+                {
+                    drop.ApplyEffect(player);
+                }
+            }
+            Destroy(collision.gameObject); // Hancurkan item
+        }
+
         Destroy(gameObject);
     }
 

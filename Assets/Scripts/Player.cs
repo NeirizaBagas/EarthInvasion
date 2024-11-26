@@ -30,10 +30,17 @@ public class Player : MonoBehaviour
     public float fireSpeedDuration;
     private float originalFireDelay;
 
+    private GameManager gameManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        gameManager = GameManager.Instance;
+        if (gameManager == null)
+        {
+            Debug.LogError("GameManager instance not found!");
+        }
+
         rb = GetComponent<Rigidbody2D>();
         currentPoint = posisiB.transform;
         canShoot = true;
@@ -108,7 +115,7 @@ public class Player : MonoBehaviour
 
             if (health <= 0)
             {
-                // Drop item atau efek lain
+                gameManager.GameOver();
                 Destroy(gameObject);
             }
         }
@@ -140,14 +147,18 @@ public class Player : MonoBehaviour
     private IEnumerator BonusDamageCoroutine(int extraDamage, float duration)
     {
         defaultDamage += extraDamage; // Tambah bonus damage
+        print("Damage+");
         yield return new WaitForSeconds(duration); // Tunggu durasi efek
         defaultDamage -= extraDamage; // Kembalikan nilai damage
+        print("Damage-");
     }
 
     private IEnumerator FireSpeedCoroutine(float newFireSpeed, float duration)
     {
         fireDelay = newFireSpeed; // Kurangi delay
+        print("Speed+");
         yield return new WaitForSeconds(duration); // Tunggu durasi efek
         fireDelay = originalFireDelay; // Kembalikan delay ke nilai asli
+        print("Speed-");
     }
 }
