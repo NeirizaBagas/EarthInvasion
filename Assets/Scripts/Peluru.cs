@@ -13,4 +13,9 @@ public class Peluru : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    public void BoostDamage(int boostDamage)
+    {
+        damage += boostDamage;
+    }
 }

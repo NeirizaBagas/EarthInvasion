@@ -184,4 +184,7 @@ MonoBehaviour:
   firePoint: {fileID: 4997299856536653908}
   fireDelay: 2
   canShoot: 1
-  drop: {fileID: 3445519778650141524, guid: f25209f944d9f7644b89799eef2c2c72, type: 3}
+  dropItems:
+  - {fileID: 3445519778650141524, guid: a4d1855242bab434889fb37ffe1b3cb1, type: 3}
+  - {fileID: 3445519778650141524, guid: a4d1855242bab434889fb37ffe1b3cb1, type: 3}
+  - {fileID: 3445519778650141524, guid: a4d1855242bab434889fb37ffe1b3cb1, type: 3}

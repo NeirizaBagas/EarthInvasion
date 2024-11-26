@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float fireDelay;
     [SerializeField] private bool canShoot;
-    [SerializeField] private GameObject drop;
+    [SerializeField] private GameObject[] dropItems;
 
     void Start()
     {
@@ -53,9 +53,14 @@ public class Enemy : MonoBehaviour
 
     void Drop()
     {
-        if (drop != null)
+        if (dropItems != null && dropItems.Length > 0)
         {
-            Instantiate(drop, transform.position, Quaternion.identity);
+            //pilih item secara acak dari array
+            int randomIndex = Random.Range(0, dropItems.Length);
+            GameObject selectedDrop = dropItems[randomIndex];
+
+            //Intantiate item di posisi enemy
+            Instantiate(selectedDrop, transform.position, Quaternion.identity);
         }
     }
 }

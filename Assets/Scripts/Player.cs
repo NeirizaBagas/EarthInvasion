@@ -22,6 +22,13 @@ public class Player : MonoBehaviour
     [SerializeField] private bool canShoot; //tes bisa nembak
     public float fireDelay; //jeda nembak
 
+    //Durasi Efek
+    public int defaultDamage;
+    private Coroutine bonusDamageCoroutine;
+    private Coroutine fireSpeedCoroutine;
+    public float bonusDamageDuration;
+    public float fireSpeedDuration;
+    private float originalFireDelay;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,6 +37,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentPoint = posisiB.transform;
         canShoot = true;
+
+        originalFireDelay = fireDelay;
     }
 
     // Update is called once per frame
@@ -74,6 +83,9 @@ public class Player : MonoBehaviour
         Rigidbody2D rb = peluru.GetComponent<Rigidbody2D>();
         rb.linearVelocity = new Vector2(0, fireSpeed);
 
+        Peluru peluruScript = peluru.GetComponent<Peluru>();
+        peluruScript.damage += defaultDamage;
+
         canShoot = false; // Mencegah tembakan berikutnya sampai peluru ini menghilang
 
         // Reset mekanisme tembakan setelah peluru menghilang
@@ -100,5 +112,42 @@ public class Player : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    public void ActivateBonusDamage(int extraDamage, float duration)
+    {
+        //Jika efek sedang aktif, hentikan dulu
+        if (bonusDamageCoroutine != null)
+        {
+            StopCoroutine(bonusDamageCoroutine);
+        }
+
+        // Mulai efek baru
+        bonusDamageCoroutine = StartCoroutine(BonusDamageCoroutine(extraDamage, duration));
+    }
+
+    public void ActivateFireSpeed(float newFireSpeed, float duration)
+    {
+        if (fireSpeedCoroutine != null)
+        {
+            StopCoroutine (fireSpeedCoroutine);
+        }
+
+        // Mulai efek baru
+        fireSpeedCoroutine = StartCoroutine(FireSpeedCoroutine(newFireSpeed, duration));
+    }
+
+    private IEnumerator BonusDamageCoroutine(int extraDamage, float duration)
+    {
+        defaultDamage += extraDamage; // Tambah bonus damage
+        yield return new WaitForSeconds(duration); // Tunggu durasi efek
+        defaultDamage -= extraDamage; // Kembalikan nilai damage
+    }
+
+    private IEnumerator FireSpeedCoroutine(float newFireSpeed, float duration)
+    {
+        fireDelay = newFireSpeed; // Kurangi delay
+        yield return new WaitForSeconds(duration); // Tunggu durasi efek
+        fireDelay = originalFireDelay; // Kembalikan delay ke nilai asli
     }
 }

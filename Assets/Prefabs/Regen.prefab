@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.097902775, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   effectType: 2
   healingAmount: 25
   boostSpeed: 0
-  boostDamage: 50
+  boostDamage: 0
   peluru: {fileID: 7853920663751401639, guid: 319cb0362926e954ebe60400383e02da, type: 3}
   dropSpeed: 1
 --- !u!50 &4155548571180487353

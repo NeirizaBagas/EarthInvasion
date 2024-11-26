@@ -7,9 +7,9 @@ public class DropItem : MonoBehaviour
     public int healingAmount;
     public float boostSpeed;
     public int boostDamage;
-    public Peluru peluru;
     public float dropSpeed; //Kecepatan drop
     private Rigidbody2D rb;
+    public float effectDuration; // Durasi efek
 
 
     private void Start()
@@ -45,10 +45,10 @@ public class DropItem : MonoBehaviour
                 break;
 
             case EffectType.BonusDamage:
-                peluru.damage += boostDamage; //Nambah damage
+                player.ActivateBonusDamage(boostDamage, effectDuration); //Nambah damage
                 break;
             case EffectType.FireSpeed:
-                player.fireDelay -= boostSpeed; //Nambah speed
+                player.ActivateFireSpeed(boostSpeed, effectDuration); //Nambah speed
                 break;
         }
 
