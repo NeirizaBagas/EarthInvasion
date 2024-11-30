@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
             {
                 Drop();
                 gameManager.enemyDestroy++;
-                gameManager.score += enemyScore;
+                gameManager.AddScore(enemyScore);
                 Destroy(gameObject);
             }
         }

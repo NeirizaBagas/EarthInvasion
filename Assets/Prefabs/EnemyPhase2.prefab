@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 200
-  enemyDamage: 25
+  enemyDamage: 15
   fireSpeed: 2
   fireDelay: 3
   firePoint: {fileID: 4842727404575302575}

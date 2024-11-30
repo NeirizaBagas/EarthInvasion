@@ -56,6 +56,11 @@ public class Player : MonoBehaviour
         {
             Shoot();
         }
+
+        if (health > 100)
+        {
+            health = 100;
+        }
     }
 
     private void Move()

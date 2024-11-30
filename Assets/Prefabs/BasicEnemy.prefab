@@ -180,13 +180,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 100
-  enemyDamage: 10
+  enemyDamage: 5
   fireSpeed: 0.5
   fireDelay: 2
   firePoint: {fileID: 4997299856536653908}
   canShoot: 1
   bulletPrefab: {fileID: 6495407240015707921, guid: 7c5dd91d637a7ca41b07afedf15a2abe, type: 3}
-  enemyScore: 0
+  enemyScore: 10
   dropItems:
   - {fileID: 3445519778650141524, guid: f25209f944d9f7644b89799eef2c2c72, type: 3}
   - {fileID: 3445519778650141524, guid: 7858de6969247664ba1d25c3e4ee8842, type: 3}
